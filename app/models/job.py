@@ -4,7 +4,7 @@ from typing import Optional
 from uuid import UUID
 
 class JobPublishMessage(BaseModel):
-    pdfRedactionId: Optional[int] = None
+    pdfRedactionProcessId: Optional[int] = None
     jobId: int
     fileKey: UUID
     piiFileKey: Optional[UUID] = None
@@ -14,7 +14,7 @@ class JobPublishMessage(BaseModel):
 
 class JobResultMessage(BaseModel):
     # richer result resembling your Java class
-    pdfRedactionId: int
+    pdfRedactionProcessId: int
     jobId: int
     currentTenant: str
     fileKey: Optional[UUID] = str

@@ -25,7 +25,7 @@ def extract(message: JobPublishMessage, callback_url: str) -> None:
             raise RuntimeError("upload_json returned no fileKey")
 
         result = JobResultMessage(
-            pdfRedactionId=getattr(message, "pdfRedactionId", None),
+            pdfRedactionProcessId=getattr(message, "pdfRedactionProcessId", None),
             jobId=job_id,
             currentTenant=message.tenantName,
             fileKey=message.fileKey,
@@ -41,7 +41,7 @@ def extract(message: JobPublishMessage, callback_url: str) -> None:
 
     except Exception as e:
         result = JobResultMessage(
-            pdfRedactionId=getattr(message, "pdfRedactionId", None),
+            pdfRedactionProcessId=getattr(message, "pdfRedactionProcessId", None),
             jobId=job_id,
             currentTenant=message.tenantName,
             fileKey=message.fileKey,
@@ -82,7 +82,7 @@ def redact(message: JobPublishMessage, callback_url: str) -> None:
             pass
 
         result = JobResultMessage(
-            pdfRedactionId=getattr(message, "pdfRedactionId", None),
+            pdfRedactionProcessId=getattr(message, "pdfRedactionProcessId", None),
             jobId=job_id,
             currentTenant=message.tenantName,
             fileKey=message.fileKey,
@@ -98,7 +98,7 @@ def redact(message: JobPublishMessage, callback_url: str) -> None:
 
     except Exception as e:
         result = JobResultMessage(
-            pdfRedactionId=getattr(message, "pdfRedactionId", None),
+            pdfRedactionProcessId=getattr(message, "pdfRedactionProcessId", None),
             jobId=job_id,
             currentTenant=message.tenantName,
             fileKey=message.fileKey,
