@@ -9,7 +9,6 @@ starlette==0.47.3
 pdfminer-six==20250506
 pymupdf==1.26.4
 pypdf==6.0.0
-fitz
 
 torch==2.2.2
 transformers==4.55.4
