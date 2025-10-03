@@ -13,7 +13,7 @@ def _to_body_bytes(payload: Any) -> bytes:
     return json.dumps(payload, separators=(",", ":"), ensure_ascii=False, default=str).encode("utf-8")
 
 
-def post_result(callback_url: str, payload, max_attempts: int = 4) -> None:
+def post_result(callback_url: str, payload, tenantName, tenantHeaderName, max_attempts: int = 4) -> None:
     body = _to_body_bytes(payload)
     backoff = [0, 1, 2, 4]
 
@@ -27,6 +27,7 @@ def post_result(callback_url: str, payload, max_attempts: int = 4) -> None:
                     content=body,
                     headers={
                         "Content-Type": "application/json",
+                        tenantHeaderName: tenantName,
                     },
                     auth=(settings.accounting_user, settings.accounting_pass.get_secret_value()),
                 )

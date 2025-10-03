@@ -36,7 +36,7 @@ def extract(message: JobPublishMessage, callback_url: str) -> None:
             error=None
         ).model_dump()
 
-        post_result(callback_url, result)
+        post_result(callback_url, result, message.tenantName, message.tenantHeaderName)
         log.info("EXTRACT job %s completed -> pii=%s", job_id, pii_file_key)
 
     except Exception as e:
@@ -52,7 +52,7 @@ def extract(message: JobPublishMessage, callback_url: str) -> None:
             error=str(e)
         ).model_dump()
         try:
-            post_result(callback_url, result)
+            post_result(callback_url, result, message.tenantName, message.tenantHeaderName)
         finally:
             log.exception("EXTRACT job %s failed", job_id)
 
@@ -93,7 +93,7 @@ def redact(message: JobPublishMessage, callback_url: str) -> None:
             error=None
         ).model_dump()
 
-        post_result(callback_url, result)
+        post_result(callback_url, result, message.tenantName, message.tenantHeaderName)
         log.info("REDACT job %s completed -> pii=%s redacted=%s", job_id, message.piiFileKey, redacted_key)
 
     except Exception as e:
@@ -109,7 +109,7 @@ def redact(message: JobPublishMessage, callback_url: str) -> None:
             error=str(e)
         ).model_dump()
         try:
-            post_result(callback_url, result)
+            post_result(callback_url, result, message.tenantName, message.tenantHeaderName)
         finally:
             log.exception("REDACT job %s failed", job_id)
 
